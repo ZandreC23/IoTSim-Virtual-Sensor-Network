@@ -4,7 +4,6 @@
 - **Project:** IoTSim: Virtual Sensor Network Simulator
 - **Author:** Zandre Coetzee
 - **Date:** March 22, 2026
-- **Course:** Software Engineering Assignment 4
 
 **Note:** This document describes what the system SHOULD do when it is built. I have not built or tested anything yet. These are the requirements I will use when I start coding.
 
