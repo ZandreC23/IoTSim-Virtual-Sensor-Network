@@ -12,9 +12,6 @@
 
 ### 1.1 Diagram
 
-## 1. Use Case Diagram
-
-### 1.1 Diagram
 
 ```mermaid
 flowchart LR
@@ -73,8 +70,8 @@ flowchart LR
     %% Include relationships
     UC6 --> UC7
     UC6 --> UC8
-    UC6 --> UC9
-    ```
+    UC6 --> UC9 
+```
 
 ### 1.2 Written Explanation
 
