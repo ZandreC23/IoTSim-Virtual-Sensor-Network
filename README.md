@@ -11,20 +11,33 @@ This system will simulate various sensors including:
 
 The architecture is a simple three-component pipeline: Sensor Simulator (Python) → CSV File Storage → Dashboard (Streamlit)
 
-## Documentation
-- [System Specification](SPECIFICATION.md)
-- [Architecture Documentation](ARCHITECTURE.md)
-- [Stakeholder Analysis](STAKEHOLDER-ANALYSIS.md)
-- [System Requirements](SYSTEM-REQUIREMENTS.md)
-- [Reflection](REFLECTION.md)
+
+---
+
+## Assignments Documentation
+
+### Assignment 3: System Specification and Architecture
+- [System Specification](Assignment-3/SPECIFICATION.md)
+- [Architecture Documentation](Assignment-3/ARCHITECTURE.md)
+
+### Assignment 4: Stakeholder Analysis and Requirements
+- [Stakeholder Analysis](Assignment-4/STAKEHOLDER-ANALYSIS.md)
+- [System Requirements](Assignment-4/SYSTEM-REQUIREMENTS.md)
+- [Reflection](Assignment-4/REFLECTION.md)
+
+### Assignment 5: Use Case Modeling and Test Case Development
+- [Use Case Diagram](Assignment-5/USE-CASE-DIAGRAM.md)
+- [Use Case Specifications](Assignment-5/USE-CASE-SPECIFICATIONS.md)
+- [Test Cases](Assignment-5/TEST-CASES.md)
+- [Reflection](Assignment-5/REFLECTION-ASSIGNMENT-5.md)
+
+---
 
 ## Technology Stack
-| Component | Technology |
-|-----------|------------|
-| Simulator | Python |
-| Data Storage | CSV files |
-| Dashboard | Streamlit |
-| Version Control | Git/GitHub |
+- **Simulator**: Python
+- **Data Storage**: CSV files
+- **Dashboard**: Streamlit
+- **Version Control**: Git/GitHub
 
 ## Getting Started
 *Setup instructions will be added when implementation begins.*
