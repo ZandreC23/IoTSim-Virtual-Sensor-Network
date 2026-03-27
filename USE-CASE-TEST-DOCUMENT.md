@@ -73,64 +73,275 @@ flowchart LR
     UC6 --> UC9 
 ```
 
-### 1.2 Written Explanation
+## 1.2 Written Explanation
 
-#### Actors and Their Roles
+### Actors and Their Roles
 
-The system identifies seven primary actors, each representing a stakeholder group interacting with IoTSim:
+The system includes seven primary actors, each representing a stakeholder identified in Assignment 4. These actors interact with the system based on their specific responsibilities and goals.
 
 | Actor | Role | Stakeholder ID |
-|------|------|----------------|
-| IoT Developer | Configures simulation parameters, generates sensor data, and monitors outputs to test IoT applications | S1 |
-| Software Tester | Validates system behavior using deterministic mode and verifies correctness of generated data | S2 |
-| System Administrator | Manages system configuration and monitors logs to ensure stable operation | S3 |
-| Product Manager | Uses the dashboard to demonstrate system capabilities and real-time data visualization | S4 |
-| IT Department | Ensures the system operates locally and manages file storage without external dependencies | S5 |
-| Academic Instructor | Uses the dashboard as a teaching tool to demonstrate IoT data patterns and system behavior | S6 |
-| Researcher | Configures experiments, exports datasets, and extends the system by adding new sensor types | S7 |
-
-Each actor reflects a real-world stakeholder identified in Assignment 4, ensuring traceability between requirements and system interactions.
+|-------|------|----------------|
+| IoT Developer | Configures simulation, generates sensor data, views dashboard to test IoT applications | S1 |
+| Software Tester | Enables deterministic mode for repeatable testing, verifies CSV output | S2 |
+| System Administrator | Configures simulation parameters, checks log files for errors | S3 |
+| Product Manager | Views dashboard to demonstrate live updates to clients | S4 |
+| IT Department | Ensures CSV storage works locally without external services | S5 |
+| Academic Instructor | Views dashboard to teach students about IoT data visualization | S6 |
+| Researcher | Configures parameters, exports data, adds new sensor types for experiments | S7 |
 
 ---
 
-#### Relationships Between Actors and Use Cases
+### Relationships and Dependencies
 
-The use case diagram models several important UML relationships:
-
-**1. Association Relationships:**  
-Actors are connected to use cases they directly initiate. For example, the *IoT Developer* is associated with configuring simulations and generating sensor data, while the *Software Tester* is specifically associated with enabling deterministic mode. This ensures role-based interaction with the system.
-
-**2. Include Relationships:**  
-The *View Dashboard* use case includes *View Temperature Chart*, *View Humidity Chart*, and *View Water Flow Chart*. This reflects that the dashboard acts as a composite interface, where individual visualizations are mandatory components of the overall system view. This improves modularity and clarity in system design.
-
-**3. Dependency Relationships:**  
-The *Configure Simulation* use case directly influences all data generation use cases (*Generate Temperature Data*, *Generate Humidity Data*, and *Generate Water Flow Data*). This dependency ensures that simulation parameters such as ranges, intervals, and enabled sensors are consistently applied across the system.
-
-**4. Constraint-Based Relationships:**  
-The *Enable Deterministic Mode* use case modifies the behavior of data generation processes by enforcing a fixed random seed. This is critical for testing scenarios where repeatability is required.
+| Relationship | Explanation |
+|--------------|------------|
+| View Dashboard includes View Temperature Chart, View Humidity Chart, View Water Flow Chart | The dashboard is the main interface; all charts are part of it |
+| Generate Temperature, Humidity, Water Flow Data are independent | Each sensor type runs separately but all feed into Save Data to CSV |
+| Configure Simulation enables Generate Data use cases | Simulation parameters (frequency, ranges) control how data is generated |
+| Enable Deterministic Mode affects Generate Data use cases | When enabled, random seed is fixed so data repeats |
 
 ---
 
-#### Alignment with Stakeholder Requirements
+### Alignment with Stakeholder Concerns
 
-The use case diagram directly addresses the functional and non-functional requirements defined in Assignment 4, ensuring that stakeholder concerns are fully represented:
-
-| Stakeholder Concern | How It Is Addressed in the Diagram |
-|--------------------|------------------------------------|
-| S1 (Developer): Need for realistic and configurable data | Supported by *Configure Simulation* and sensor data generation use cases |
-| S2 (Tester): Need for repeatable and testable outputs | Addressed by *Enable Deterministic Mode* |
-| S3 (Admin): Need for system monitoring and reliability | Addressed by *View Log File* |
-| S4 (Product Manager): Need for a clear and presentable interface | Addressed by *View Dashboard* and chart use cases |
-| S5 (IT Department): Requirement for local-only execution | Addressed by *Save Data to CSV* without external dependencies |
-| S6 (Instructor): Need for educational visualization tools | Addressed by dashboard and chart visualization use cases |
-| S7 (Researcher): Need for extensibility and data export | Addressed by *Add New Sensor Type* and *Export Data* |
+| Stakeholder Concern | Addressed By |
+|--------------------|-------------|
+| S1 (Developer): Realistic data | Generate Temperature/Humidity/Water Flow with realistic patterns |
+| S2 (Tester): Repeatable data | Enable Deterministic Mode |
+| S3 (Admin): Simple monitoring | View Log File |
+| S4 (PM): Demo-ready dashboard | View Dashboard and chart use cases |
+| S5 (IT): Local-only operation | Save Data to CSV (no external services) |
+| S6 (Instructor): Clear teaching | View Dashboard with visible charts |
+| S7 (Researcher): Configurable experiments | Configure Simulation, Add New Sensor Type, Export Data |
 
 ---
 
-#### Justification of Design
+## 2. Use Case Specifications
 
-The diagram balances abstraction and detail by grouping related functionality into meaningful use cases while avoiding unnecessary fragmentation. Core system operations such as data generation, configuration, visualization, and storage are clearly separated, improving maintainability and scalability.
+### Use Case 1: Configure Simulation
 
-Additionally, the inclusion of multiple actors demonstrates that the system supports diverse use cases, ranging from development and testing to education and research. This reinforces the system’s flexibility and real-world applicability.
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-01 |
+| Use Case Name | Configure Simulation |
+| Actors | IoT Developer, System Administrator, Researcher |
+| Description | User modifies simulation parameters such as update frequency, sensor value ranges, and which sensors are enabled |
+| Preconditions | `config.json` file exists |
+| Postconditions | New settings applied. Next simulation cycle uses updated values |
 
-Overall, the use case model provides a clear, structured representation of how stakeholders interact with IoTSim, ensuring that all critical system behaviors are captured and aligned with the original requirements.
+**Basic Flow:**
+1. User opens `config.json` in a text editor  
+2. User modifies parameters (e.g., temperature range, update interval)  
+3. User saves the file  
+4. Simulator detects file change on next cycle  
+5. Simulator applies new settings  
+
+**Alternative Flow (File Not Found):**
+1. Simulator starts and `config.json` does not exist  
+2. System creates default config file with standard values  
+3. Use case continues with default settings  
+
+---
+
+### Use Case 2: Generate Temperature Data
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-02 |
+| Use Case Name | Generate Temperature Data |
+| Actors | IoT Developer, Researcher |
+| Description | System generates temperature readings between 18-25°C following a daily cycle |
+| Preconditions | Simulation is running, temperature sensor enabled |
+| Postconditions | Temperature reading generated and added to data queue for CSV storage |
+
+**Basic Flow:**
+1. Simulator timer reaches generation interval  
+2. System calculates current time of day  
+3. System calculates temperature using sine wave (peak at 2pm, minimum at 4am)  
+4. System assigns unique sensor ID  
+5. System adds timestamp in ISO format  
+6. Reading passed to Save Data to CSV  
+
+**Alternative Flow (Sensor Disabled):**
+1. User disables temperature sensor in config  
+2. Simulator skips generation for this sensor type  
+
+---
+
+### Use Case 3: Generate Humidity Data
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-03 |
+| Use Case Name | Generate Humidity Data |
+| Actors | IoT Developer, Researcher |
+| Description | System generates humidity readings between 30-70% with controlled variation |
+| Preconditions | Simulation is running, humidity sensor enabled |
+| Postconditions | Humidity reading added to CSV |
+
+**Basic Flow:**
+1. Simulator timer reaches generation interval  
+2. System generates random humidity value within 30-70%  
+3. Change from previous reading ≤ 5%  
+4. Sensor ID and timestamp assigned  
+5. Reading passed to CSV  
+
+**Alternative Flow (Deterministic Mode):**
+1. `deterministic_mode` set to true in config  
+2. System uses fixed random seed  
+3. Same humidity values generated each run  
+
+---
+
+### Use Case 4: Generate Water Flow Data
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-04 |
+| Use Case Name | Generate Water Flow Data |
+| Actors | IoT Developer, Researcher |
+| Description | System generates water flow readings between 0-100 L/min with occasional spikes |
+| Preconditions | Simulation running, water flow sensor enabled |
+| Postconditions | Water flow reading added to CSV |
+
+**Basic Flow:**
+1. Timer triggers data generation  
+2. Random baseline generated (0-20 L/min)  
+3. Check spike counter; if spike → 50-100 L/min  
+4. Assign sensor ID and timestamp  
+5. Pass reading to CSV  
+
+**Alternative Flow (Spike Occurs):**
+1. Spike counter reaches threshold  
+2. Generate spike value 50-100 L/min  
+3. Counter resets  
+
+---
+
+### Use Case 5: Save Data to CSV
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-05 |
+| Use Case Name | Save Data to CSV |
+| Actors | Software Tester, IT Department, Researcher |
+| Description | Writes sensor readings to CSV with headers and timestamp |
+| Preconditions | Data generated from sensors |
+| Postconditions | Reading appended to CSV file |
+
+**Basic Flow:**
+1. System receives reading  
+2. Check if CSV exists; create if not  
+3. Append new row with timestamp, sensor type, ID, value  
+4. Flush write buffer to disk  
+
+**Alternative Flow (File Write Error):**
+1. File locked or disk full  
+2. Log error, skip writing  
+3. Simulation continues  
+
+---
+
+### Use Case 6: View Dashboard
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-06 |
+| Use Case Name | View Dashboard |
+| Actors | IoT Developer, Product Manager, Academic Instructor |
+| Description | Displays live sensor data visualization |
+| Preconditions | Dashboard server running, CSV exists |
+| Postconditions | Charts display current values, auto-refresh every 2s |
+
+**Basic Flow:**
+1. User opens dashboard URL  
+2. System reads latest CSV data  
+3. Charts for temperature, humidity, water flow displayed  
+4. Current values shown  
+5. Auto-refresh every 2 seconds  
+
+**Alternative Flow (No Data):**
+- CSV empty → dashboard shows "Waiting for data"
+
+---
+
+### Use Case 7: Enable Deterministic Mode
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-07 |
+| Use Case Name | Enable Deterministic Mode |
+| Actors | Software Tester |
+| Description | Fixes random seed so simulation is repeatable |
+| Preconditions | Config file exists |
+| Postconditions | `deterministic_mode` enabled, data repeatable |
+
+**Basic Flow:**
+1. Open config.json  
+2. Set `deterministic_mode: true`  
+3. Save file  
+4. Simulator applies setting on next cycle  
+
+**Alternative Flow (Disable Mode):**
+- `deterministic_mode: false` → random seed uses current time
+
+---
+
+### Use Case 8: Export Data
+
+| Field | Content |
+|-------|---------|
+| Use Case ID | UC-08 |
+| Use Case Name | Export Data |
+| Actors | Researcher |
+| Description | Export CSV data for external analysis |
+| Preconditions | CSV contains readings |
+| Postconditions | Data available externally |
+
+**Basic Flow:**
+1. Locate CSV  
+2. Copy to desired location  
+3. Open in Excel/Python/analysis tool  
+
+**Alternative Flow (Large File):**
+- CSV > 10,000 rows → use Python with pandas for efficient processing
+
+---
+
+## 3. Test Cases
+
+### 3.1 Functional Test Cases
+
+| Test Case ID | Requirement ID | Description | Steps | Expected Result | Actual Result | Status |
+|--------------|----------------|------------|-------|----------------|---------------|--------|
+| TC-001 | FR-01 | Temperature sensor follows daily cycle | Run simulator at 2pm & 4am, record temperature | Temp higher at 2pm (~25°C) than 4am (~18°C) | TBD | TBD |
+| TC-002 | FR-02 | Humidity changes ≤5% per reading | Run 10 readings, calculate differences | All ≤5% | TBD | TBD |
+| TC-003 | FR-03 | Water flow includes spikes | Run 50 readings, count >50 L/min | ≥2 spikes observed | TBD | TBD |
+| TC-004 | FR-04 | Config file settings applied | Set temperature 20-30°C, run simulator, check CSV | All values 20-30°C | TBD | TBD |
+| TC-005 | FR-07 | Data saves to CSV | Run simulator 1 min, open CSV | File exists with all columns | TBD | TBD |
+| TC-006 | FR-11 | Dashboard updates every 2s | Measure time from CSV write to dashboard display | Delay ≤2s | TBD | TBD |
+| TC-007 | FR-15 | Dashboard shows current values | Run simulator, view dashboard | Current temp, humidity, water flow displayed | TBD | TBD |
+| TC-008 | FR-16 | Dashboard auto-refreshes | Watch for new data | New data appears automatically | TBD | TBD |
+
+---
+
+### 3.2 Non-Functional Test Cases
+
+| Test Case ID | Requirement ID | Category | Description | Steps | Expected Result | Actual Result | Status |
+|--------------|----------------|---------|------------|-------|----------------|---------------|--------|
+| NTC-001 | NFR-05 | Security | System runs without internet | Disable WiFi, run simulator | Works normally, all data local | TBD | TBD |
+| NTC-002 | NFR-09 | Security | No network connections | Run `netstat -an` | No outbound connections | TBD | TBD |
+| NTC-003 | NFR-11 | Performance | 3 sensors at 5s intervals | Run 1 hour, count CSV rows | ≥2,160 rows, CPU <5% | TBD | TBD |
+| NTC-004 | NFR-12 | Performance | Dashboard updates within 2s | Measure CSV → dashboard delay | ≤2s | TBD | TBD |
+| NTC-005 | NFR-13 | Performance | System startup time | Measure from execution to first reading | ≤5s | TBD | TBD |
+| NTC-006 | NFR-04 | Deployability | Runs on Windows & Linux | Test on Windows & Ubuntu VM | Both run without errors | TBD | TBD |
+| NTC-007 | NFR-08 | Scalability | Add new sensor type | Add class + config, run simulator | New sensor appears in CSV | TBD | TBD |
+| NTC-008 | NFR-01 | Usability | Works in multiple browsers | Open dashboard in Chrome, Firefox, Edge | Dashboard displays correctly | TBD | TBD |
+
+---
+
+## 4. Reflection
+
+### 4.1 What I Learned
+
+> *Reflection goes here (personal insight about IoT simulation, testing, visualization, stakeholder alignment, and development process).*
