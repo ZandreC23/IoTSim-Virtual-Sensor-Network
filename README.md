@@ -31,6 +31,12 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [Test Cases](Assignment-5/TEST-CASES.md)
 - [Reflection](Assignment-5/REFLECTION-ASSIGNMENT-5.md)
 
+### Assignment 6: Agile Planning - User Stories, Product Backlog, Sprint Planning
+- [User Stories](Assignment-6/USER-STORIES.md)
+- [Product Backlog](Assignment-6/PRODUCT-BACKLOG.md)
+- [Sprint Planning](Assignment-6/SPRINT-PLANNING.md)
+- [Reflection](Assignment-6/REFLECTION-ASSIGNMENT-6.md)
+
 ---
 
 ## Technology Stack
