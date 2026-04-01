@@ -71,4 +71,3 @@ This assignment taught me that Agile planning is about making trade-offs. You ca
 
 The sprint plan I created is ambitious but realistic. If I follow the tasks and timeline, I should have a working MVP at the end of 2 weeks. And that MVP will actually solve the problem from Assignment 4: giving developers realistic sensor data without physical hardware.
 
-**Word Count: 512**
