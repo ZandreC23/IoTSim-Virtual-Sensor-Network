@@ -2,41 +2,39 @@
 
 ## Challenges in Selecting and Customizing the Template
 
-The hardest part of this assignment was choosing between the three templates. At first, I wanted to use Automated Kanban because the automation sounded helpful. But when I thought about my actual workflow, I realized automation would hide what I am doing. For example, if a PR automatically closes an issue, I might forget to test it first. Since I am the only person working on this project, I need full control over when tasks move between columns.
+The hardest part of this assignment was choosing between the three templates. At first, I wanted to use Team Planning because it looked more organized. But when I read about it, I realized it is designed for Scrum teams with multiple people. It has sprint iterations, team capacity planning, and effort estimates per team member. I am one person. That template would add unnecessary complexity.
 
-Another challenge was adding the Testing column. I initially thought about adding a "Code Review" column, but I am the only developer. A code review column would be empty forever. So I chose Testing because that is something I actually do: run the test cases I wrote in Assignment 5.
+I also considered Roadmap. It has a timeline view with dependencies and milestone tracking. But my IoT Simulator has no fixed deadlines. I build features in priority order, not on a schedule. The only dependency is simple (CSV must work before dashboard). Roadmap would be overkill.
 
-The Blocked column was also a difficult decision. I was not sure if I would ever use it since I am working alone. But I realized problems can still happen. For example, if a library does not install correctly, that blocks my progress. Having a Blocked column forces me to document the problem instead of ignoring it.
+Another challenge was adding custom columns. I added "Testing" because I need to verify my code works before marking it done. I added "Blocked" because sometimes problems happen (e.g., a library won't install) and I need to document that. These two columns make the board work for my actual workflow.
 
-## Comparison of GitHub Templates to Other Tools
+## Comparison to Other Tools
 
-I have used Trello before for a group project. Trello is very similar to GitHub's Basic Kanban. Both have columns and cards. The main difference is that GitHub Projects is built into my repository. I do not need to copy issue titles from GitHub to Trello. Everything is already connected.
+| Tool | Experience |
+|------|------------|
+| **GitHub Projects** | Built into my repository. Issues link directly to code. No extra setup. The board view is simple but effective. |
+| **Trello** | I have used Trello before for a group project. It has a beautiful UI and is very easy to use. But it does not integrate with GitHub. I would have to copy issue titles manually. |
+| **Jira** | I have seen Jira used at companies. It is very powerful with epics, stories, tasks, sprints, releases, and detailed reports. But for a solo project, it is too expensive and too complex. |
 
-Jira is too powerful for my needs. Jira has epics, stories, tasks, subtasks, sprints, releases, and many other features. For a solo IoT simulator project, Jira would be like using a fire hose to water a small plant. GitHub Projects is simple enough for one person but powerful enough to scale to a team if needed.
-
-Here is my comparison:
-
-| Feature | GitHub Projects | Trello | Jira |
-|---------|-----------------|--------|------|
-| GitHub integration | Perfect (built-in) | None (manual) | Partial (plugin) |
-| Learning curve | Low | Very low | High |
-| Setup time | 1 minute | 5 minutes | 30+ minutes |
-| Cost | Free | Free (limited) | Paid for teams |
-| Reporting | Basic | Basic | Advanced |
-| Best for | GitHub users | Small teams | Enterprise teams |
+For my solo IoT Simulator project, GitHub Projects is the best choice because my code is already on GitHub. I don't need to switch between tools.
 
 ## What I Learned
 
-This assignment taught me that project management tools are not one-size-fits-all. The "best" tool depends on the project, the team size, and the workflow. For my solo IoT simulator project, Basic Kanban with custom Testing and Blocked columns is perfect. It is simple enough to use without thinking but powerful enough to track all 11 user stories.
+This assignment taught me that project management tools are not one-size-fits-all. The "best" tool depends on:
+- Team size (solo vs team)
+- Project complexity (simple vs complex)
+- Deadlines (fixed vs flexible)
+- Integration needs (GitHub vs standalone)
 
-I also learned that WIP limits are important even for one person. Before this assignment, I would start five tasks at once and finish none of them. Now I force myself to focus on only two tasks at a time. This should help me actually complete the project.
+For my solo project, Basic Kanban with custom Testing and Blocked columns is perfect. It is simple enough to use without thinking but powerful enough to track all 11 user stories.
 
-## Lessons for Future Projects
+## What I Would Do Differently
 
-1. **Start simple, add complexity later.** Basic Kanban was the right choice. I can always add automation later if I need it.
+If I did this again, I would:
+1. Look at the templates earlier. I spent too much time trying to make Team Planning work before realizing it was wrong for my project.
+2. Add WIP limits immediately. Before this assignment, I would start many tasks at once and finish none. Now I force myself to focus on only 2 tasks at a time.
+3. Take screenshots as I go. I had to recreate some screenshots at the end because I forgot to save them.
 
-2. **Custom columns should reflect actual workflow.** I added Testing because I actually test. I did not add Code Review because I do not review my own code.
+## Conclusion
 
-3. **WIP limits are not restrictions; they are focus tools.** Limiting myself to 2 tasks in progress helps me finish faster.
-
-4. **GitHub Projects is good enough.** I do not need Trello or Jira when my code is already on GitHub.
+GitHub Projects with Basic Kanban is the right choice for my IoT Simulator. It is simple, visual, integrated with my code, and helps me focus on one task at a time. The Testing and Blocked columns I added make it work for my actual workflow, not just a generic template.
