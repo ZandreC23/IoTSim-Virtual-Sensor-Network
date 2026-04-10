@@ -1,50 +1,64 @@
 # Template Analysis: GitHub Project Templates
 
-## Comparison Table of 3+ Templates
+## Screenshot of Available Templates
 
-| Feature | Basic Kanban | Automated Kanban | Team Planning |
-|---------|--------------|------------------|---------------|
-| **Default Columns** | Todo, In Progress, Done | Todo, In Progress, Done | Backlog, In Progress, Done |
-| **Workflow** | Manual drag and drop | Auto-moves issues based on triggers | Manual with sprint planning |
-| **Automation Features** | None | Auto-closes issues when PR merged; auto-moves when issue closed | None |
-| **Issue Linking** | Manual | Automatic when PR references issue | Manual |
-| **Suitable For** | Small teams, simple projects | Teams using GitHub heavily | Teams doing sprint planning |
-| **Agile Support** | Basic Kanban | Kanban with automation | Scrum + Kanban hybrid |
-| **WIP Limits** | Not supported | Not supported | Not supported |
-| **Custom Columns** | Yes | Yes | Yes |
+![GitHub Project Templates](template-comparison.png)
+
+*Above: The three built-in templates available when creating a new GitHub Project.*
+
+## Comparison Table
+
+| Feature | Team Planning | Roadmap | Basic Kanban |
+|---------|---------------|---------|--------------|
+| **Default View** | Table (spreadsheet layout) | Timeline (Gantt-style) | Board (Kanban cards) |
+| **Primary Use** | Sprint planning, backlog management | Long-term planning, milestone tracking | Daily task workflow |
+| **Columns** | Backlog, Ready, In Progress, Done | Timeline with date ranges | Todo, In Progress, Done |
+| **Best For** | Scrum teams, sprint planning | Project roadmaps, stakeholder communication | Continuous flow, Kanban teams |
+| **Automation** | Yes (built-in workflows) | Limited | Yes (drag-and-drop, auto-close) |
+| **Dependencies** | Not visualized | Yes (task dependencies shown) | No |
+| **Date Tracking** | Start/end dates per item | Timeline view with dates | No |
+| **Team Capacity** | Yes (effort estimates per member) | No | No |
 
 ## My Chosen Template: Basic Kanban
 
-I selected the **Basic Kanban** template for the following reasons:
+I selected **Basic Kanban** for my IoT Simulator project for these reasons:
 
 ### Justification
 
-1. **Simplicity**: My project is a single-person IoT simulator. I don't need complex automation that might hide what I'm working on.
+1. **Solo Developer**: I am the only person working on this project. Team Planning is designed for multiple team members with capacity planning. I don't need that complexity.
 
-2. **Full Control**: Automated Kanban moves issues automatically when PRs are merged. Since I'm working alone, I want to manually control when tasks move between columns.
+2. **No Fixed Deadlines**: Roadmap is for projects with hard deadlines and dependencies. My IoT Simulator has no external deadlines or task dependencies.
 
-3. **Customizable**: Basic Kanban allows me to add columns like "Testing" and "Blocked" which are essential for my workflow.
+3. **Simple Workflow**: Basic Kanban has exactly what I need: Todo, In Progress, Testing, Blocked, Done. I added "Testing" and "Blocked" as custom columns.
 
-4. **Alignment with Assignment 6**: The Basic Kanban template matches the sprint backlog I created in Assignment 6, where I had tasks in Todo, In Progress, and Done states.
+4. **Visual Progress**: Board view lets me see all 11 user stories at once and drag them as I make progress.
 
-5. **No Over-engineering**: Team Planning template is designed for multiple people doing sprint planning. I am one person. Basic Kanban is perfect for my scale.
+5. **GitHub Integration**: Issues link directly to code. When I close an issue, it can auto-move to Done.
 
-### How It Aligns with My Project Needs
+### Why Not Team Planning?
+
+Team Planning is great for Scrum teams with multiple people doing sprint planning. It has fields for effort estimates, team capacity, and sprint iterations. I am one person. I don't need to estimate capacity across a team.
+
+### Why Not Roadmap?
+
+Roadmap is for projects with fixed release dates, milestones, and task dependencies. My IoT Simulator has none of these. I am building features in priority order, not on a fixed timeline.
+
+## How Basic Kanban Aligns with My Project Needs
 
 | Need | How Basic Kanban Addresses It |
 |------|------------------------------|
 | Track 11 user stories | All issues visible in Todo column |
 | Know what I'm working on | Move issues to In Progress |
-| Verify work before completion | Testing column added |
-| Handle unexpected problems | Blocked column added |
+| Verify work before completion | Added "Testing" column |
+| Handle unexpected problems | Added "Blocked" column |
 | Track completion | Done column shows finished work |
 
-### Comparison to Other Tools
+## Comparison to Other Tools
 
-| Tool | Pros | Cons |
-|------|------|------|
-| **GitHub Projects (Basic Kanban)** | Integrated with issues, free, no setup | Limited reporting |
-| **Trello** | Beautiful UI, easy to use | No GitHub integration |
-| **Jira** | Powerful, detailed reporting | Overkill for solo project, expensive |
+| Tool | Pros | Cons | Best For |
+|------|------|------|----------|
+| **GitHub Basic Kanban** | Integrated with code, free, simple | Limited reporting | Solo developers, small teams |
+| **Trello** | Beautiful UI, easy to use | No GitHub integration | Non-technical teams |
+| **Jira** | Powerful, detailed reporting | Overkill for solo project, expensive | Enterprise teams |
 
-For my project, GitHub Projects is the best choice because my code is already on GitHub.
+For my solo IoT Simulator project, GitHub Basic Kanban is the perfect choice because my code is already on GitHub and I need simple task tracking, not complex sprint planning.
