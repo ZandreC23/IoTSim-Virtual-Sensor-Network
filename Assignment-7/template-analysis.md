@@ -1,11 +1,5 @@
 # Template Analysis: GitHub Project Templates
 
-## Screenshot of Available Templates
-
-![GitHub Project Templates](template-comparison.png)
-
-*Above: The three built-in templates available when creating a new GitHub Project.*
-
 ## Comparison Table
 
 | Feature | Team Planning | Roadmap | Basic Kanban |
