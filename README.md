@@ -37,6 +37,11 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [Sprint Planning](Assignment-6/SPRINT-PLANNING.md)
 - [Reflection](Assignment-6/REFLECTION-ASSIGNMENT-6.md)
 
+### Assignment 7: GitHub Project Templates and Kanban Board Implementation
+- [Template Analysis](Assignment-7/template-analysis.md)
+- [Kanban Explanation](Assignment-7/kanban-explanation.md)
+- [Reflection](Assignment-7/reflection-assignment-7.md)
+- [Kanban Board Screenshot](Assignment-7/kanban-board.png)
 ---
 
 ## Technology Stack
