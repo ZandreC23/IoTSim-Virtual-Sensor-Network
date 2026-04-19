@@ -42,6 +42,11 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [Kanban Explanation](Assignment-7/kanban-explanation.md)
 - [Reflection](Assignment-7/reflection-assignment-7.md)
 - [Kanban Board Screenshot](Assignment-7/kanban-board.png)
+
+### Assignment 8: Object State Modeling and Activity Workflow Modeling
+- [State Transition Diagrams](Assignment-8/state-transition-diagrams.md)
+- [Activity Diagrams](Assignment-8/activity-diagrams.md)
+- [Reflection](Assignment-8/reflection-assignment-8.md)
 ---
 
 ## Technology Stack
