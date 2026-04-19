@@ -46,7 +46,7 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 ### Assignment 8: Object State Modeling and Activity Workflow Modeling
 - [State Transition Diagrams](Assignment-8/state-transition-diagrams.md)
 - [Activity Diagrams](Assignment-8/activity-diagrams.md)
-- [Reflection](Assignment-8/reflection-assignment-8.md)
+- [Reflection](Assignment-8/REFLECTION-ASSIGNMENT-8.md)
 ---
 
 ## Technology Stack
