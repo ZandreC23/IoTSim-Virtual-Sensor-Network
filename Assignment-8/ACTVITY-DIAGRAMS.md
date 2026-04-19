@@ -62,6 +62,9 @@ flowchart TD
     F --> G[Send to CSV storage]
     G --> End([End])
 ```
+**Swimlanes:**
+- **User**: Configures humidity range
+- **System**: Generates random value, checks change, regenerates if needed, adds timestamp, assigns ID, sends to CSV storage
 
 ### Explanation
 

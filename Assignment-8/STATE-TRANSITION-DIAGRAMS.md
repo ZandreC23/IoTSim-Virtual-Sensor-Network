@@ -159,11 +159,11 @@ stateDiagram-v2
 
 | State | Description | Related FR | Related US |
 |-------|-------------|------------|------------|
-| Default | Using built-in default settings | FR-04 | US-004 |
+| DefaultState | Using built-in default settings | FR-04 | US-004 |
 | Loaded | Config file successfully loaded | FR-04 | US-004 |
 | Modified | User changed config file | FR-05 | US-004 |
 | Reloading | Simulator applying new settings | FR-05 | US-004 |
-| Error | Invalid config syntax | - | - |
+| ErrorState | Invalid config syntax | - | - |
 
 ---
 
