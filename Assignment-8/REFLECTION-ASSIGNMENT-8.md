@@ -1,9 +1,3 @@
-
----
-
-## Step 4: Create `reflection-assignment-8.md`
-
-```markdown
 # Reflection: Assignment 8 - State and Activity Modeling
 
 ## Challenges in Choosing Granularity for States and Actions
