@@ -1,7 +1,6 @@
 
 ## Step 5: Create `REFLECTION-ASSIGNMENT-9.md`
 
-
 # Reflection: Assignment 9 - Domain Modeling and Class Diagram
 
 ## Challenges Faced in Designing the Domain Model
@@ -87,5 +86,3 @@ The state transitions I modeled in Assignment 8 become methods in the class diag
 ## Summary
 
 This assignment taught me that a good class diagram is not just a collection of boxes and arrows. It must capture the essence of the domain, enforce business rules, and align with requirements from previous assignments. My class diagram has 8 classes (1 abstract, 7 concrete), 5 relationships (inheritance, composition, aggregation, association), and clear multiplicity.
-
-The next step is implementation. With this class diagram, I know exactly what classes to create and what methods they need.
