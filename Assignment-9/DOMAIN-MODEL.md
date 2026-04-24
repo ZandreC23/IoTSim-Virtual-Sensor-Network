@@ -36,7 +36,8 @@
 
 **Relationships:**
 - Sensor is inherited by TemperatureSensor, HumiditySensor, WaterFlowSensor
-- Sensor produces SensorReading objects (association)
+- Runtime: Sensor generates SensorReading objects. A SensorReading cannot exist without its parent Sensor during execution (composition).
+- Persistence: CSVStorage stores SensorReading objects independently for analysis (aggregation).
 
 **Business Rules:**
 - A sensor can only generate readings when isEnabled = true
@@ -135,8 +136,8 @@
 | flagAnomaly() | Marks reading as anomaly if out of range |
 
 **Relationships:**
-- Sensor generates SensorReading objects (association) 
-- SensorReading is stored in CSVStorage
+- **Runtime:** Sensor generates SensorReading objects. A SensorReading cannot exist without its parent Sensor during execution (composition).
+- **Persistence:** CSVStorage stores SensorReading objects independently for analysis (aggregation).
 
 **Business Rules:**
 - Each reading must have a valid timestamp

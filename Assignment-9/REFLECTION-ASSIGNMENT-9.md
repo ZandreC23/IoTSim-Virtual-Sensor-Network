@@ -78,7 +78,7 @@ The state transitions I modeled in Assignment 8 become methods in the class diag
 
 2. **Use abstract classes when objects share behavior.** My three sensor types share enable/disable logic but have different data generation logic.
 
-3. **Composition is stronger than aggregation.** I used composition for Sensor → SensorReading because readings don't make sense without a sensor.
+3. **Association is appropriate for runtime relationships.** I used association for Sensor → SensorReading because readings are generated over time but can exist independently in storage. Aggregation was used for CSVStorage → SensorReading to represent persistence.
 
 4. **Multiplicity matters.** A single configuration object controls multiple sensors (1 to 1..*). One dashboard reads from one CSV file (1 to 1).
 
