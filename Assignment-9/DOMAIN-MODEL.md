@@ -36,7 +36,7 @@
 
 **Relationships:**
 - Sensor is inherited by TemperatureSensor, HumiditySensor, WaterFlowSensor
-- Sensor produces SensorReading objects (composition)
+- Sensor produces SensorReading objects (association)
 
 **Business Rules:**
 - A sensor can only generate readings when isEnabled = true
@@ -135,7 +135,7 @@
 | flagAnomaly() | Marks reading as anomaly if out of range |
 
 **Relationships:**
-- SensorReading is composed by Sensor (composition - Sensor cannot exist without readings)
+- Sensor generates SensorReading objects (association) 
 - SensorReading is stored in CSVStorage
 
 **Business Rules:**

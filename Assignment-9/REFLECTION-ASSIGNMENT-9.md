@@ -18,12 +18,13 @@ I chose inheritance (Sensor → TemperatureSensor) because the relationship is c
 
 ### Challenge 2: SensorReading Relationship
 
-I struggled with whether SensorReading should be composition or aggregation.
+I initially considered composition between Sensor and SensorReading, because a sensor logically produces readings. However, in the final design I modeled this as an association.
 
-- **Composition (Sensor owns SensorReading):** A reading cannot exist without a sensor. If a sensor is deleted, its readings should also be deleted. This makes sense in memory.
-- **Aggregation (CSVStorage owns SensorReading):** Readings can exist independently in the CSV file. The dashboard can read readings even if the simulator is not running.
+- **Association (Sensor → SensorReading):** Sensors generate readings over time, but readings are independent data records that can exist in storage and analytics systems.
 
-I chose both: composition between Sensor and SensorReading (in the running system), and aggregation between CSVStorage and SensorReading (for persistence).
+- **Aggregation (CSVStorage → SensorReading):** CSVStorage is responsible for storing readings persistently after they are generated.
+
+This approach better reflects the real-world data flow of a monitoring system where readings are produced continuously and stored externally.
 
 ### Challenge 3: Configuration Coupling
 
@@ -66,7 +67,7 @@ The state transitions I modeled in Assignment 8 become methods in the class diag
 | Trade-off | My Choice | Why |
 |-----------|-----------|-----|
 | Inheritance vs Composition for sensors | Inheritance | Sensors are clearly "is-a" relationships |
-| Composition vs Aggregation for readings | Both | Composition for runtime, aggregation for persistence |
+| Association for runtime generation, aggregation for persistence | Both | Association for runtime generation, aggregation for persistence |
 | High coupling vs Simplicity | Simplicity | Configuration directly controls sensors |
 | Abstract class vs Interface | Abstract class | Sensors share common attributes and methods |
 | Public vs Private attributes | Private with public getters | Encapsulation |
@@ -85,4 +86,4 @@ The state transitions I modeled in Assignment 8 become methods in the class diag
 
 ## Summary
 
-This assignment taught me that a good class diagram is not just a collection of boxes and arrows. It must capture the essence of the domain, enforce business rules, and align with requirements from previous assignments. My class diagram has 8 classes (1 abstract, 7 concrete), 5 relationships (inheritance, composition, aggregation, association), and clear multiplicity.
+This assignment taught me that a good class diagram is not just a collection of boxes and arrows. It must capture the essence of the domain, enforce business rules, and align with requirements from previous assignments. My class diagram has 8 classes (1 abstract, 7 concrete), multiple relationships including inheritance, association, aggregation, and multiplicity constraints.
