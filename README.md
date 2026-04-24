@@ -47,6 +47,11 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [State Transition Diagrams](Assignment-8/STATE-TRANSITION-DIAGRAMS.md)
 - [Activity Diagrams](Assignment-8/ACTIVITY-DIAGRAMS.md)
 - [Reflection](Assignment-8/REFLECTION-ASSIGNMENT-8.md)
+
+### Assignment 9: Domain Modeling and Class Diagram Development
+- [Domain Model](Assignment-9/DOMAIN-MODEL.md)
+- [Class Diagram](Assignment-9/CLASS-DIAGRAM.md)
+- [Reflection](Assignment-9/REFLECTION-ASSIGNMENT-9.md)
 ---
 
 ## Technology Stack
