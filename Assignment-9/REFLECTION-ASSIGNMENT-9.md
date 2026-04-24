@@ -1,89 +1,98 @@
-
-## Step 5: Create `REFLECTION-ASSIGNMENT-9.md`
-
-# Reflection: Assignment 9 - Domain Modeling and Class Diagram
+# Reflection: Class Diagram Design - IoTSim
 
 ## Challenges Faced in Designing the Domain Model
 
-The hardest part of this assignment was deciding on the right level of abstraction. I had to ask myself: what belongs in the domain model and what is just implementation detail?
+The hardest part of this assignment was deciding on the right level of abstraction. I had to carefully distinguish between what belongs in the domain model versus what is implementation detail.
 
 ### Challenge 1: Abstract Sensor vs Concrete Sensor Types
 
-I initially created separate classes for TemperatureSensor, HumiditySensor, and WaterFlowSensor without a base class. But then I noticed they share common attributes (sensorId, isEnabled, currentValue) and common methods (enable(), disable(), getStatus()). This was code duplication waiting to happen.
+I initially created separate classes for TemperatureSensor, HumiditySensor, and WaterFlowSensor without a base class. However, I noticed they share common attributes (sensorId, isEnabled, currentValue) and methods (enable(), disable(), getStatus()), which led to duplication.
 
-I decided to create an abstract Sensor class with a abstract `generateReading()` method. This follows the Template Method pattern. Each sensor type implements its own generation logic. The downside is more files, but the upside is that adding a new sensor type (e.g., PressureSensor) requires no changes to existing code.
+To resolve this, I introduced an abstract Sensor class with an abstract generateReading() method. This follows the Template Method pattern, where each sensor type implements its own data generation logic.
 
-**Trade-off:** Inheritance vs Composition
-I chose inheritance (Sensor → TemperatureSensor) because the relationship is clearly "is-a" (TemperatureSensor is a Sensor). Composition would not make sense here because a TemperatureSensor does not "have" a Sensor.
+**Trade-off: Inheritance vs Composition**  
+I chose inheritance (Sensor → TemperatureSensor, etc.) because the relationship is clearly "is-a". A TemperatureSensor is a Sensor, making inheritance the most appropriate and clean design choice.
 
-### Challenge 2: SensorReading Relationship
+### Challenge 2: SensorReading Relationship Design
 
-I initially considered composition between Sensor and SensorReading, because a sensor logically produces readings. However, in the final design I modeled this as an association.
+A key design decision was how Sensor relates to SensorReading.
 
-- **Association (Sensor → SensorReading):** Sensors generate readings over time, but readings are independent data records that can exist in storage and analytics systems.
+I modeled this relationship as an association because SensorReading represents generated data records that exist independently after creation.
 
-- **Aggregation (CSVStorage → SensorReading):** CSVStorage is responsible for storing readings persistently after they are generated.
+- **Association (Sensor → SensorReading)**: Sensors generate readings over time, but readings are independent data objects that can exist in storage and analytics systems.
+- **Aggregation (CSVStorage → SensorReading)**: CSVStorage is responsible for persisting SensorReading objects after they are generated.
 
-This approach better reflects the real-world data flow of a monitoring system where readings are produced continuously and stored externally.
+This accurately reflects the real-world IoT data flow where sensors generate data continuously and storage systems manage persistence separately.
 
 ### Challenge 3: Configuration Coupling
 
-The Configuration class controls almost every other class. It tells sensors when to generate data, what ranges to use, and whether deterministic mode is on. This creates high coupling.
+The Configuration class influences system behaviour by defining sensor ranges, update frequency, and operational settings.
 
-I considered using the Observer pattern where sensors listen for configuration changes. But that seemed over-engineered for my simple simulator. Instead, the simulator reads config on each cycle. This is simpler but less efficient.
+Instead of using a complex Observer pattern, I opted for a simpler design where configuration values are loaded and applied during system execution.
+
+**Trade-off: Simplicity vs Flexibility**  
+I prioritised simplicity and maintainability over advanced decoupling patterns, as it is sufficient for the scope of this simulator.
 
 ## Alignment with Previous Assignments
 
 ### Assignment 4 (Functional Requirements)
 
-Every functional requirement maps to a class method:
-- FR-01 (temperature daily cycle) → TemperatureSensor.calculateDailyCycle()
-- FR-02 (humidity random variations) → HumiditySensor.validateChange()
+Each functional requirement maps to class methods:
+
+- FR-01 (temperature cycle) → TemperatureSensor.calculateDailyCycle()
+- FR-02 (humidity variation) → HumiditySensor.validateChange()
 - FR-03 (water flow spikes) → WaterFlowSensor.shouldSpike()
-- FR-07 to FR-10 (CSV storage) → CSVStorage methods
-- FR-11 to FR-16 (dashboard) → Dashboard methods
+- FR-07–FR-10 (CSV storage) → CSVStorage methods
+- FR-11–FR-16 (dashboard features) → Dashboard methods
 
 ### Assignment 5 (Use Cases)
 
 Use cases map to class interactions:
-- UC-01 (Configure Simulation) → Configuration.loadConfig() + Configuration.applySettings()
-- UC-02, UC-03, UC-04 (Generate Data) → Sensor.generateReading() implementations
-- UC-05 (Save to CSV) → CSVStorage.appendReading()
-- UC-06 to UC-09 (View Dashboard) → Dashboard methods
+
+- UC-01 (Configure Simulation) → Configuration.loadConfig() + applySettings()
+- UC-02–UC-04 (Generate sensor data) → Sensor.generateReading()
+- UC-05 (Store data) → CSVStorage.appendReading()
+- UC-06–UC-09 (Dashboard viewing) → Dashboard methods
 
 ### Assignment 8 (State Diagrams)
 
-Each state diagram has a corresponding class:
+Each state diagram maps directly to a class:
+
 - Sensor State Diagram → Sensor class
 - SensorData State Diagram → SensorReading class
 - CSVFile State Diagram → CSVStorage class
 - Dashboard State Diagram → Dashboard class
 - Configuration State Diagram → Configuration class
 
-The state transitions I modeled in Assignment 8 become methods in the class diagram. For example, the transition from "Enabled" to "Generating" in the Sensor state diagram is triggered by the `generateReading()` method.
+State transitions identified in Assignment 8 are implemented as methods in the class diagram. For example, transitioning from an active sensor state to data generation is represented by the generateReading() method.
 
 ## Trade-offs Made
 
-| Trade-off | My Choice | Why |
-|-----------|-----------|-----|
-| Inheritance vs Composition for sensors | Inheritance | Sensors are clearly "is-a" relationships |
-| Association for runtime generation, aggregation for persistence | Both | Association for runtime generation, aggregation for persistence |
-| High coupling vs Simplicity | Simplicity | Configuration directly controls sensors |
-| Abstract class vs Interface | Abstract class | Sensors share common attributes and methods |
-| Public vs Private attributes | Private with public getters | Encapsulation |
+| Trade-off | Decision | Reason |
+|-----------|----------|---------|
+| Inheritance vs Composition (Sensors) | Inheritance | Sensors clearly follow an "is-a" relationship |
+| Sensor → SensorReading relationship | Association | Readings are generated objects that exist independently |
+| CSVStorage → SensorReading | Aggregation | Storage manages persistence of generated data |
+| Complexity vs Simplicity | Simplicity | Avoided unnecessary design patterns |
+| Abstract class vs Interface | Abstract class | Shared state and behaviour required |
+| Encapsulation | Private attributes + public methods | Controlled access to data |
 
 ## Lessons Learned About Object-Oriented Design
 
-1. **Start with the domain model before coding.** It forces you to think about relationships before implementation.
-
-2. **Use abstract classes when objects share behavior.** My three sensor types share enable/disable logic but have different data generation logic.
-
-3. **Association is appropriate for runtime relationships.** I used association for Sensor → SensorReading because readings are generated over time but can exist independently in storage. Aggregation was used for CSVStorage → SensorReading to represent persistence.
-
-4. **Multiplicity matters.** A single configuration object controls multiple sensors (1 to 1..*). One dashboard reads from one CSV file (1 to 1).
-
-5. **Traceability keeps you honest.** Mapping each class to functional requirements, use cases, and state diagrams helped me ensure nothing was missing.
+1. Designing a system starts with understanding the domain, not the code.
+2. Abstract classes are useful when multiple entities share behaviour but differ in implementation.
+3. Association is appropriate when objects interact but do not share lifecycle dependency.
+4. Aggregation is useful for representing persistence or external storage relationships.
+5. Multiplicity is important in modelling real-world relationships (e.g., 1 sensor → many readings).
+6. Consistency across diagrams and explanations is essential for academic correctness.
+7. Traceability ensures every class is justified by requirements, use cases, or user stories.
 
 ## Summary
 
-This assignment taught me that a good class diagram is not just a collection of boxes and arrows. It must capture the essence of the domain, enforce business rules, and align with requirements from previous assignments. My class diagram has 8 classes (1 abstract, 7 concrete), multiple relationships including inheritance, association, aggregation, and multiplicity constraints.
+This assignment helped me translate system requirements into a structured object-oriented domain model.
+
+The final class diagram consists of 8 classes (1 abstract, 7 concrete) with clear inheritance, association, and aggregation relationships.
+
+All classes are traceable to functional requirements, use cases, and state diagrams, ensuring consistency across the entire IoTSim system design.
+
+The final design balances simplicity, correctness, and extensibility while accurately modelling a real-world IoT sensor simulation system.
