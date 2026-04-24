@@ -4,113 +4,118 @@
 
 ```mermaid
 classDiagram
-    class Sensor {
-        <<abstract>>
-        -sensorId: String
-        -sensorType: String
-        -isEnabled: Boolean
-        -currentValue: Float
-        -lastUpdate: DateTime
-        +generateReading()* Float
-        +enable() void
-        +disable() void
-        +getStatus() String
-    }
 
-    class TemperatureSensor {
-        -minTemp: Float = 18
-        -maxTemp: Float = 25
-        -timeOfDay: Integer
-        +generateReading() Float
-        +calculateDailyCycle() Float
-        +validateReading(value: Float) Boolean
-    }
+%% =========================
+%% ABSTRACT BASE CLASS
+%% =========================
+class Sensor {
+    <<abstract>>
+    -sensorId: String
+    -sensorType: String
+    -isEnabled: Boolean
+    -currentValue: Float
+    -lastUpdate: DateTime
+    +generateReading() Float
+    +enable() void
+    +disable() void
+    +getStatus() String
+}
 
-    class HumiditySensor {
-        -minHumidity: Float = 30
-        -maxHumidity: Float = 70
-        -previousValue: Float
-        +generateReading() Float
-        +validateChange(value: Float) Boolean
-        +regenerateIfNeeded() Float
-    }
+%% =========================
+%% SENSOR TYPES
+%% =========================
+class TemperatureSensor {
+    -minTemp: Float
+    -maxTemp: Float
+    -timeOfDay: Integer
+    +generateReading() Float
+    +calculateDailyCycle() Float
+    +validateReading(value: Float) Boolean
+}
 
-    class WaterFlowSensor {
-        -minFlow: Float = 0
-        -maxFlow: Float = 100
-        -spikeCounter: Integer = 0
-        -spikeThreshold: Integer = 15
-        +generateReading() Float
-        +shouldSpike() Boolean
-        +resetSpikeCounter() void
-    }
+class HumiditySensor {
+    -minHumidity: Float
+    -maxHumidity: Float
+    -previousValue: Float
+    +generateReading() Float
+    +validateChange(value: Float) Boolean
+    +regenerateIfNeeded() Float
+}
 
-    class SensorReading {
-        -readingId: String
-        -sensorId: String
-        -sensorType: String
-        -value: Float
-        -timestamp: DateTime
-        -isAnomaly: Boolean
-        +toCSVRow() String
-        +validate() Boolean
-        +flagAnomaly() void
-    }
+class WaterFlowSensor {
+    -minFlow: Float
+    -maxFlow: Float
+    -spikeCounter: Integer
+    -spikeThreshold: Integer
+    +generateReading() Float
+    +shouldSpike() Boolean
+    +resetSpikeCounter() void
+}
 
-    class CSVStorage {
-        -fileName: String = "sensor_data.csv"
-        -headers: List~String~
-        -isWritable: Boolean
-        +createFile() void
-        +appendReading(reading: SensorReading) void
-        +readAllReadings() List~SensorReading~
-        +checkFileExists() Boolean
-    }
+%% =========================
+%% SUPPORTING CLASSES
+%% =========================
+class SensorReading {
+    -readingId: String
+    -sensorId: String
+    -sensorType: String
+    -value: Float
+    -timestamp: DateTime
+    -isAnomaly: Boolean
+    +toCSVRow() String
+    +validate() Boolean
+    +flagAnomaly() void
+}
 
-    class Dashboard {
-        -refreshInterval: Integer = 2
-        -dataWindow: Integer = 300
-        -csvFilePath: String
-        -isRunning: Boolean
-        +loadData() List~SensorReading~
-        +updateCharts() void
-        +updateCurrentValues() void
-        +autoRefresh() void
-    }
+class CSVStorage {
+    -fileName: String
+    -headers: List~String~
+    -isWritable: Boolean
+    +createFile() void
+    +appendReading(reading: SensorReading) void
+    +readAllReadings() List~SensorReading~
+    +checkFileExists() Boolean
+}
 
-    class Configuration {
-        -configPath: String = "config.json"
-        -updateFrequency: Integer = 5
-        -temperatureRange: Map
-        -humidityRange: Map
-        -waterFlowRange: Map
-        -deterministicMode: Boolean = false
-        -enabledSensors: List~String~
-        +loadConfig() void
-        +saveConfig() void
-        +validateSettings() Boolean
-        +applySettings() void
-    }
+class Dashboard {
+    -refreshInterval: Integer
+    -dataWindow: Integer
+    -csvFilePath: String
+    -isRunning: Boolean
+    +loadData() List~SensorReading~
+    +updateCharts() void
+    +updateCurrentValues() void
+    +autoRefresh() void
+}
 
-    %% Inheritance Relationships
-    Sensor <|-- TemperatureSensor
-    Sensor <|-- HumiditySensor
-    Sensor <|-- WaterFlowSensor
+class Configuration {
+    -configPath: String
+    -updateFrequency: Integer
+    -temperatureRange: Object
+    -humidityRange: Object
+    -waterFlowRange: Object
+    -deterministicMode: Boolean
+    -enabledSensors: List~String~
+    +loadConfig() void
+    +saveConfig() void
+    +validateSettings() Boolean
+    +applySettings() void
+}
 
-    %% Composition Relationships (strong)
-    Sensor *-- "1..*" SensorReading : produces
+%% =========================
+%% INHERITANCE RELATIONSHIPS
+%% =========================
+Sensor <|-- TemperatureSensor
+Sensor <|-- HumiditySensor
+Sensor <|-- WaterFlowSensor
 
-    %% Aggregation Relationships (weak)
-    CSVStorage o-- "0..*" SensorReading : stores
-
-    %% Association Relationships
-    CSVStorage ..> Dashboard : reads from
-    Configuration --> Sensor : controls
-    Dashboard --> CSVStorage : depends on
-
-    %% Multiplicity
-    Sensor "1" -- "1" Configuration : configured by
-    CSVStorage "1" -- "1" Dashboard : provides data for
+%% =========================
+%% CLASS RELATIONSHIPS
+%% =========================
+Sensor "1" --> "0..*" SensorReading : generates
+CSVStorage "1" o-- "0..*" SensorReading : stores
+Dashboard "1" --> "1" CSVStorage : reads from
+Configuration "1" --> "1..*" Sensor : controls
 ```
 
 ## Key Design Decisions
@@ -124,16 +129,18 @@ I made Sensor an abstract class because no generic sensor exists in the system. 
 
 **Alternative considered:** Making Sensor a concrete class with a type parameter. But this would violate the Open/Closed Principle because adding a new sensor type would require modifying the Sensor class. The abstract class approach allows extension without modification.
 
-### 2. Composition vs Aggregation
-**Composition (Sensor → SensorReading):** SensorReading cannot exist without a Sensor. If a Sensor is deleted, all its readings are also deleted. This is represented by `Sensor *-- SensorReading` with multiplicity `1..*`.
+### 2. Association vs Aggregation
 
-**Aggregation (CSVStorage → SensorReading):** SensorReading can exist independently of CSVStorage. Readings are stored in the CSV file, but they exist before being saved. This is represented by `CSVStorage o-- SensorReading` with multiplicity `0..*`.
+**Association (Sensor → SensorReading):**  
+A Sensor generates zero or many SensorReading objects over time. Each reading is linked to the sensor that created it.
+
+**Aggregation (CSVStorage → SensorReading):** SensorReading can exist independently of CSVStorage. Readings are stored in the CSV file, but they exist before being saved. This is represented by `CSVStorage "1" o-- "0..*" SensorReading : stores` in the diagram above.
 
 ### 3. Multiplicity Decisions
 
 | Relationship | Multiplicity | Reason |
 |-------------|-------------|---------|
-| Sensor to SensorReading | 1 → 1..* | One sensor produces many readings over time |
+| Sensor to SensorReading | 1 → 0..* | One sensor produces zero or many readings over time |
 | CSVStorage to SensorReading | 1 → 0..* | Storage can have zero readings initially |
 | Configuration to Sensor | 1 → 1..* | One config controls multiple sensors |
 | Dashboard to CSVStorage | 1 → 1 | Dashboard reads from one CSV file |
