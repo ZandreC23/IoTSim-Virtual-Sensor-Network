@@ -1,9 +1,7 @@
 
----
-
 ## Step 5: Create `REFLECTION-ASSIGNMENT-9.md`
 
-```markdown
+
 # Reflection: Assignment 9 - Domain Modeling and Class Diagram
 
 ## Challenges Faced in Designing the Domain Model
