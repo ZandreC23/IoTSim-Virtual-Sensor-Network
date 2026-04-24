@@ -87,12 +87,3 @@ State transitions identified in Assignment 8 are implemented as methods in the c
 6. Consistency across diagrams and explanations is essential for academic correctness.
 7. Traceability ensures every class is justified by requirements, use cases, or user stories.
 
-## Summary
-
-This assignment helped me translate system requirements into a structured object-oriented domain model.
-
-The final class diagram consists of 8 classes (1 abstract, 7 concrete) with clear inheritance, association, and aggregation relationships.
-
-All classes are traceable to functional requirements, use cases, and state diagrams, ensuring consistency across the entire IoTSim system design.
-
-The final design balances simplicity, correctness, and extensibility while accurately modelling a real-world IoT sensor simulation system.
