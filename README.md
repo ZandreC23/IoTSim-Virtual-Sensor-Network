@@ -52,6 +52,42 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [Domain Model](Assignment-9/DOMAIN-MODEL.md)
 - [Class Diagram](Assignment-9/CLASS-DIAGRAM.md)
 - [Reflection](Assignment-9/REFLECTION-ASSIGNMENT-9.md)
+  
+### Assignment 10: From Class Diagrams to Code with All Creational Patterns
+
+**Language Choice:** Python 3.x
+
+**Why Python?** Python was chosen for its simplicity, readability, and extensive testing libraries (unittest, pytest). The syntax allows clear implementation of all six creational patterns.
+
+**Class Implementations (from UML diagram):**
+
+| Class | File | Description |
+|-------|------|-------------|
+| Sensor (abstract) | `src/sensor.py` | Base class for all sensors |
+| TemperatureSensor | `src/temperature_sensor.py` | Simulates daily temperature cycle (18-25°C) |
+| HumiditySensor | `src/humidity_sensor.py` | Simulates humidity with ≤5% change per reading |
+| WaterFlowSensor | `src/water_flow_sensor.py` | Simulates water flow with spikes every 10-20 readings |
+| SensorReading | `src/sensor_reading.py` | Individual sensor data point |
+| CSVStorage | `src/csv_storage.py` | Handles CSV file operations |
+| Dashboard | `src/dashboard.py` | Simulates real-time data visualization |
+| Configuration | `src/configuration.py` | Manages simulation settings (Singleton) |
+
+**Creational Patterns Implemented:**
+
+| Pattern | File | Use Case |
+|---------|------|----------|
+| Simple Factory | `creational_patterns/simple_factory.py` | Centralized sensor creation |
+| Factory Method | `creational_patterns/factory_method.py` | Delegate instantiation to subclasses |
+| Abstract Factory | `creational_patterns/abstract_factory.py` | Create families of storage objects |
+| Builder | `creational_patterns/builder.py` | Construct complex SensorReading objects |
+| Prototype | `creational_patterns/prototype.py` | Clone sensors without costly initialization |
+| Singleton | `creational_patterns/singleton.py` | Ensure one ConfigurationManager instance |
+
+**Unit Tests:**
+
+```bash
+cd Assignment-10
+python -m pytest tests/test_all.py -v
 ---
 
 ## Technology Stack
