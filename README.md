@@ -88,10 +88,8 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 **Unit Tests:**
 **Tests:** [tests/](Assignment-10/tests/)
 
-bash
-cd Assignment-10
-python -m pytest tests/test_all.py -v
----
+**Documentation:** [Changelog](CHANGELOG.md) | [Reflection](Assignment-10/REFLECTION-ASSIGNMENT-10.md)
+
 
 ## Technology Stack
 - **Simulator**: Python
