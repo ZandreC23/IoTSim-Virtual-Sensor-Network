@@ -60,6 +60,7 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 **Why Python?** Python was chosen for its simplicity, readability, and extensive testing libraries (unittest, pytest). The syntax allows clear implementation of all six creational patterns.
 
 **Class Implementations (from UML diagram):**
+**Source Code:** [src/](Assignment-10/src/)
 
 | Class | File | Description |
 |-------|------|-------------|
@@ -73,6 +74,7 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 | Configuration | `src/configuration.py` | Manages simulation settings (Singleton) |
 
 **Creational Patterns Implemented:**
+**Patterns:** [creational_patterns/](Assignment-10/creational_patterns/)
 
 | Pattern | File | Use Case |
 |---------|------|----------|
@@ -84,8 +86,9 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 | Singleton | `creational_patterns/singleton.py` | Ensure one ConfigurationManager instance |
 
 **Unit Tests:**
+**Tests:** [tests/](Assignment-10/tests/)
 
-```bash
+bash
 cd Assignment-10
 python -m pytest tests/test_all.py -v
 ---
@@ -97,4 +100,4 @@ python -m pytest tests/test_all.py -v
 - **Version Control**: Git/GitHub
 
 ## Getting Started
-*Setup instructions will be added when implementation begins.*
+*The system has been fully implemented. All 6 creational patterns and 8 classes are complete with 55 passing unit tests.*
