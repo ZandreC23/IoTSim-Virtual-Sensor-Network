@@ -1,5 +1,3 @@
-
-```markdown
 # Reflection: Assignment 10 - From Class Diagrams to Code with Creational Patterns
 
 ## Overview
