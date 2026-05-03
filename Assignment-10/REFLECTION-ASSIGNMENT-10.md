@@ -1,12 +1,4 @@
 
----
-
-## File 2: Create `Assignment-10/REFLECTION-ASSIGNMENT-10.md`
-
-**In VS Code:** Right-click on `Assignment-10` folder → New File → `REFLECTION-ASSIGNMENT-10.md`
-
-**Copy and paste this content:**
-
 ```markdown
 # Reflection: Assignment 10 - From Class Diagrams to Code with Creational Patterns
 
@@ -76,5 +68,3 @@ This assignment taught me how to implement UML class diagrams in Python and appl
 The patterns I implemented will make the IoTSim system extensible (Factory Method supports new sensor types), reusable (Prototype clones existing objects), and maintainable (Singleton ensures consistent configuration).
 
 **What I would do differently:** Add more edge cases in unit tests and implement the visual dashboard using Streamlit as extra credit.
-
-**Word count: 550**
