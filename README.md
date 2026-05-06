@@ -100,6 +100,15 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [Configuration Model](Assignment-11/configuration.py)
 - [Reflection](Assignment-11/REFLECTION-ASSIGNMENT-11.md)
 
+**Justification for Generics:** 
+I used `Repository[T, ID]` with generics because my project has two domain objects (SensorReading and Configuration) that both need CRUD operations. Writing separate save(), find_by_id(), delete() methods for each would duplicate the same logic. The generic interface allows me to write the interface once and reuse it for both entities.
+
+**Why Factory Pattern instead of DI:**
+I chose the Factory Pattern over Dependency Injection because:
+- My project is small (only 2 repositories). DI would require a container which is overkill.
+- The RepositoryFactory centralizes storage switching in one place with `set_storage_type("MEMORY")`.
+- Future storage backends (database) only need one line added to the factory, no changes to existing code.
+
 ## Technology Stack
 - **Simulator**: Python
 - **Data Storage**: CSV files

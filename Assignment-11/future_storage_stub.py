@@ -7,8 +7,8 @@ from typing import List, Optional
 from datetime import datetime
 from repositories.sensor_reading_repository import SensorReadingRepository
 from repositories.configuration_repository import ConfigurationRepository
-from src.sensor_reading import SensorReading
-from src.configuration import Configuration
+from sensor_reading import SensorReading
+from configuration import Configuration
 
 
 class FileSystemSensorReadingRepository(SensorReadingRepository):
