@@ -96,6 +96,8 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 - [Unit Tests](Assignment-11/tests/)
 - [Future Storage Stub](Assignment-11/future_storage_stub.py)
 - [Updated Class Diagram](Assignment-11/class_diagram.md)
+- [SensorReading Model](Assignment-11/sensor_reading.py)
+- [Configuration Model](Assignment-11/configuration.py)
 - [Reflection](Assignment-11/REFLECTION-ASSIGNMENT-11.md)
 
 ## Technology Stack
