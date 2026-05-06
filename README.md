@@ -90,6 +90,13 @@ The architecture is a simple three-component pipeline: Sensor Simulator (Python)
 
 **Documentation:** [Changelog](CHANGELOG.md) | [Reflection](Assignment-10/REFLECTION-ASSIGNMENT-10.md)
 
+### Assignment 11: Implementing a Persistence Repository Layer
+- [Repository Layer Source Code](Assignment-11/repositories/)
+- [Repository Factory](Assignment-11/factories/)
+- [Unit Tests](Assignment-11/tests/)
+- [Future Storage Stub](Assignment-11/future_storage_stub.py)
+- [Updated Class Diagram](Assignment-11/class_diagram.md)
+- [Reflection](Assignment-11/REFLECTION-ASSIGNMENT-11.md)
 
 ## Technology Stack
 - **Simulator**: Python
