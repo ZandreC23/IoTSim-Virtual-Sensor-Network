@@ -109,6 +109,41 @@ I chose the Factory Pattern over Dependency Injection because:
 - The RepositoryFactory centralizes storage switching in one place with `set_storage_type("MEMORY")`.
 - Future storage backends (database) only need one line added to the factory, no changes to existing code.
 
+### Assignment 12: Service Layer and REST API Development
+- [Service Layer](Assignment-12/services/)
+- [API Routes](Assignment-12/main.py)
+- [Repository Layer](Assignment-12/repositories/)
+- [Unit Tests](Assignment-12/tests/)
+- [API Documentation](Assignment-12/docs/)
+- [Changelog](Assignment-12/CHANGELOG.md)
+- [Reflection](Assignment-12/REFLECTION-ASSIGNMENT-12.md)
+
+**Language:** Python 3.x with FastAPI
+
+**Services Implemented:**
+| Service | File | Description |
+|---------|------|-------------|
+| SensorReadingService | `services/sensor_reading_service.py` | Validates and stores sensor readings |
+| ConfigurationService | `services/configuration_service.py` | Manages simulator configuration |
+| SimulationLogService | `services/simulation_log_service.py` | Tracks simulation lifecycle |
+
+**API Endpoints:**
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/readings | Get all sensor readings |
+| POST | /api/readings | Create a new reading |
+| GET | /api/readings/anomalies | Get anomalous readings |
+| GET | /api/readings/{id} | Get reading by ID |
+| DELETE | /api/readings/{id} | Delete a reading |
+| GET | /api/config | Get configuration |
+| PUT | /api/config | Update configuration |
+| POST | /api/simulations/{id}/start | Start a simulation |
+| POST | /api/simulations/{id}/end | End a simulation |
+| GET | /api/simulations | Get all simulations |
+| GET | /api/simulations/{id} | Get simulation by ID |
+
+**Tests:** 21/21 passing
+
 ## Technology Stack
 - **Simulator**: Python
 - **Data Storage**: CSV files
