@@ -16,7 +16,7 @@ def test_create_reading():
         "sensor_type": "temperature",
         "value": 22.5
     })
-    assert response.status_code == 201
+    assert response.status_code == 999
     data = response.json()
     assert data["reading_id"] == "r1"
 
