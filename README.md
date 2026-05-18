@@ -143,6 +143,24 @@ I chose the Factory Pattern over Dependency Injection because:
 | GET | /api/simulations/{id} | Get simulation by ID |
 
 **Tests:** 21/21 passing
+### Assignment 13: CI/CD with GitHub Actions
+- [CI/CD Workflow](.github/workflows/ci.yml)
+- [Branch Protection](Assignment-13/PROTECTION.md)
+- [Reflection](Assignment-13/REFLECTION-ASSIGNMENT-13.md)
+- [Screenshots](Assignment-13/screenshots/)
+
+**How to run tests locally:**
+```bash
+cd Assignment-12
+pip install fastapi uvicorn pytest httpx pydantic anyio
+python -m pytest tests/ -v
+```
+
+**How the CI/CD pipeline works:**
+1. Every push to any branch triggers the `test` job which runs all 21 tests
+2. Every PR to `master` must pass the `test` job before merging
+3. When merged to `master`, the `build` job creates a release artifact (iotsim-api.zip)
+4. Branch protection rules prevent direct pushes to `master` and require 1 review
 
 ## Technology Stack
 - **Simulator**: Python
