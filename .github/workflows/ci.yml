@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install fastapi uvicorn pytest httpx pydantic anyio
+
+      - name: Run tests
+        run: |
+          cd Assignment-12
+          python -m pytest tests/ -v
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create release artifact
+        run: |
+          mkdir -p release
+          cd Assignment-12
+          zip -r ../release/iotsim-api.zip . --exclude "*.pyc" --exclude "*__pycache__*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: iotsim-api
+          path: release/iotsim-api.zip
