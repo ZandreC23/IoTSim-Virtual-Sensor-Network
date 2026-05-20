@@ -165,8 +165,45 @@ python -m pytest tests/ -v
 ## Technology Stack
 - **Simulator**: Python
 - **Data Storage**: CSV files
-- **Dashboard**: Streamlit
 - **Version Control**: Git/GitHub
 
 ## Getting Started
-*The system has been fully implemented. All 6 creational patterns and 8 classes are complete with 55 passing unit tests.*
+
+### Prerequisites
+- Python 3.11+
+- Git
+
+### Installation
+1. Clone the repository:
+```bash
+   git clone https://github.com/ZandreC23/IoTSim-Virtual-Sensor-Network.git
+   cd IoTSim-Virtual-Sensor-Network
+```
+2. Install dependencies:
+```bash
+   cd Assignment-12
+   pip install fastapi uvicorn pytest httpx pydantic anyio
+```
+3. Run the tests:
+```bash
+   python -m pytest tests/ -v
+```
+4. Start the API:
+```bash
+   python -m uvicorn main:app --reload
+```
+5. Open Swagger UI at `http://127.0.0.1:8000/docs`
+
+## Features for Contribution
+| Feature | Difficulty | Label |
+|---------|------------|-------|
+| Add GPS sensor simulation | Easy | `good-first-issue` |
+| Add pagination to GET /api/readings | Easy | `good-first-issue` |
+| Add pressure sensor simulation | Easy | `good-first-issue` |
+| Improve error messages in API responses | Easy | `good-first-issue` |
+| Add input validation for sensor_id field | Easy | `good-first-issue` |
+| Integrate Redis caching for API responses | Hard | `feature-request` |
+| Add database storage with SQLite | Medium | `feature-request` |
+| Build web dashboard to visualize sensor data | Hard | `feature-request` |
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to get started contributing.
