@@ -162,6 +162,19 @@ python -m pytest tests/ -v
 3. When merged to `master`, the `build` job creates a release artifact (iotsim-api.zip)
 4. Branch protection rules prevent direct pushes to `master` and require 1 review
 
+### Assignment 14: Peer Review and Open-Source Collaboration
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Roadmap](ROADMAP.md)
+- [License](LICENSE)
+- [Reflection](Assignment-14/REFLECTION.md)
+- [Voting Results](Assignment-14/VOTING_RESULTS.md)
+
+**Open Source Readiness:**
+- MIT License added
+- CONTRIBUTING.md with setup instructions and PR guidelines
+- ROADMAP.md with planned features at varying difficulty levels
+- Issues labeled with `good-first-issue` and `feature-request` for contributors
+
 ## Technology Stack
 - **Simulator**: Python
 - **Data Storage**: CSV files
