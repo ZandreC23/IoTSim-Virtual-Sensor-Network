@@ -6,8 +6,8 @@
 ## Peer Engagement Stats
 | Metric | Count |
 |--------|-------|
-| ⭐ Stars | 0 |
-| 🍴 Forks | 0 |
+| ⭐ Stars | 3 |
+| 🍴 Forks | 3 |
 
 ## Notes
 - Repository was shared with classmates for peer review
