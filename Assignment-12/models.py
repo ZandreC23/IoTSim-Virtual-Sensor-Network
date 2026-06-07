@@ -16,7 +16,6 @@ class SensorReading(BaseModel):
     timestamp: datetime = Field(default_factory=datetime.now)
     is_anomaly: bool = False
 
-
 class Configuration(BaseModel):
     update_frequency: int = 5
     temperature_range: dict = {"min": 18.0, "max": 25.0}

@@ -26,6 +26,13 @@ app = FastAPI(title="IoTSim API", description="REST API for IoT Simulator", vers
 # ========== SensorReading endpoints ==========
 @app.post("/api/readings", response_model=SensorReading, status_code=status.HTTP_201_CREATED, tags=["Readings"])
 def create_reading(reading: SensorReading):
+    # Add validation for sensor_id
+    if hasattr(reading, 'sensor_id') and reading.sensor_id is not None:
+    if not reading.sensor_id.strip():
+        raise HTTPException(status_code=400, detail="sensor_id cannot be empty")
+    if len(reading.sensor_id) < 3:
+        raise HTTPException(status_code=400, detail="sensor_id must be at least 3 characters long")
+
     try:
         return sensor_service.create_reading(reading)
     except ValueError as e:
