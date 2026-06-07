@@ -43,6 +43,32 @@ class TestSensorReadingService:
         self.service.delete_reading("r1")
         assert self.service.get_reading("r1") is None
 
+    def test_create_valid_pressure_reading(self):
+        reading = SensorReading(reading_id="p1", sensor_id="s5", sensor_type="pressure", value=1013.25)
+        result = self.service.create_reading(reading)
+        assert result.reading_id == "p1"
+        assert result.sensor_type == "pressure"
+
+    def test_create_pressure_reading_at_min_boundary(self):
+        reading = SensorReading(reading_id="p2", sensor_id="s5", sensor_type="pressure", value=950.0)
+        result = self.service.create_reading(reading)
+        assert result.value == 950.0
+
+    def test_create_pressure_reading_at_max_boundary(self):
+        reading = SensorReading(reading_id="p3", sensor_id="s5", sensor_type="pressure", value=1050.0)
+        result = self.service.create_reading(reading)
+        assert result.value == 1050.0
+
+    def test_create_invalid_pressure_too_low(self):
+        reading = SensorReading(reading_id="p4", sensor_id="s5", sensor_type="pressure", value=800.0)
+        with pytest.raises(ValueError, match="Pressure must be between 950 and 1050 hPa"):
+            self.service.create_reading(reading)
+
+    def test_create_invalid_pressure_too_high(self):
+        reading = SensorReading(reading_id="p5", sensor_id="s5", sensor_type="pressure", value=1200.0)
+        with pytest.raises(ValueError, match="Pressure must be between 950 and 1050 hPa"):
+            self.service.create_reading(reading)
+
 
 class TestConfigurationService:
     def setup_method(self):
