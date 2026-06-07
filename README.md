@@ -175,6 +175,20 @@ python -m pytest tests/ -v
 - ROADMAP.md with planned features at varying difficulty levels
 - Issues labeled with `good-first-issue` and `feature-request` for contributors
 
+### Assignment 15: Cross-Project Contributions & Collaborative Development
+- [Contribution Plan](Assignment-15/CONTRIBUTION_PLAN.md)
+- [Merged PRs](Assignment-15/MERGED_PRS.md)
+- [Reflection](Assignment-15/REFLECTION.md)
+- [Screenshots](Assignment-15/screenshots/)
+- [Contributions Summary](CONTRIBUTIONS.md)
+
+**Pull Requests Submitted:**
+| # | Repository | Status |
+|---|-----------|--------|
+| 1 | [UniMatch-University-Application-System](https://github.com/Mabotse-Mosima/UniMatch-University-Application-System/pull/81) | ✅ Merged |
+| 2 | [SmartBin-Campus-Rewards](https://github.com/Thandeka-debug/SmartBin-Campus-Rewards/pull/38) | ✅ Merged |
+| 3 | [student-early-warning-system](https://github.com/sinothando/student-early-warning-system/pull/28) | ⏳ Pending |
+
 ## Technology Stack
 - **Simulator**: Python
 - **Data Storage**: CSV files
