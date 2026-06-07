@@ -5,7 +5,7 @@ Defines SensorReading, Configuration, and SimulationLog.
 
 from datetime import datetime
 from typing import Optional, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 
 class SensorReading(BaseModel):
@@ -16,6 +16,14 @@ class SensorReading(BaseModel):
     timestamp: datetime = Field(default_factory=datetime.now)
     is_anomaly: bool = False
 
+# Add validation for sensor_id
+    @validator('sensor_id')
+    def validate_sensor_id(cls, v):
+        if not v or not v.strip():
+            raise ValueError('sensor_id cannot be empty')
+        if len(v) < 3:
+            raise ValueError('sensor_id must be at least 3 characters long')
+        return v
 
 class Configuration(BaseModel):
     update_frequency: int = 5
