@@ -19,6 +19,8 @@ class SensorReadingService:
             raise ValueError("Humidity must be between 30 and 70")
         if reading.sensor_type == "water" and not (0 <= reading.value <= 100):
             raise ValueError("Water flow must be between 0 and 100")
+        if reading.sensor_type == "pressure" and not (950 <= reading.value <= 1050):
+            raise ValueError("Pressure must be between 950 and 1050 hPa")
         self.repo.save(reading)
         return reading
     

@@ -22,8 +22,9 @@ class Configuration(BaseModel):
     temperature_range: dict = {"min": 18.0, "max": 25.0}
     humidity_range: dict = {"min": 30.0, "max": 70.0}
     water_flow_range: dict = {"min": 0.0, "max": 100.0}
+    pressure_range: dict = {"min": 950.0, "max": 1050.0}
     deterministic_mode: bool = False
-    enabled_sensors: List[str] = ["temperature", "humidity", "water"]
+    enabled_sensors: List[str] = ["temperature", "humidity", "water", "pressure"]
 
 
 class SimulationLog(BaseModel):

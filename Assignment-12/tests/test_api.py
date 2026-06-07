@@ -52,10 +52,39 @@ def test_delete_reading():
     assert get_resp.status_code == 404
 
 
+def test_create_pressure_reading():
+    response = client.post("/api/readings", json={
+        "reading_id": "p1",
+        "sensor_id": "s5",
+        "sensor_type": "pressure",
+        "value": 1013.25
+    })
+    assert response.status_code == 201
+    data = response.json()
+    assert data["reading_id"] == "p1"
+    assert data["sensor_type"] == "pressure"
+    assert data["value"] == 1013.25
+
+
+def test_create_invalid_pressure_reading():
+    response = client.post("/api/readings", json={
+        "reading_id": "p2",
+        "sensor_id": "s5",
+        "sensor_type": "pressure",
+        "value": 500.0
+    })
+    assert response.status_code == 400
+    assert "Pressure must be between 950 and 1050 hPa" in response.text
+
+
 def test_get_config():
     response = client.get("/api/config")
     assert response.status_code == 200
-    assert response.json()["update_frequency"] == 5
+    data = response.json()
+    assert data["update_frequency"] == 5
+    assert "pressure_range" in data
+    assert data["pressure_range"] == {"min": 950.0, "max": 1050.0}
+    assert "pressure" in data["enabled_sensors"]
 
 
 def test_update_config():
