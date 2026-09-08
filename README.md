@@ -2,6 +2,20 @@
 
 A digital twin IoT simulator that generates virtual sensor data streams for testing IoT systems without physical sensors.
 
+**Lane:** AI + Security · Software Engineering
+
+**Status:** Working — REST API runs, CI pipeline green, 21 passing API tests
+
+**Stack:** `Python` · `FastAPI` · `pytest` · `GitHub Actions`
+
+**Highlights**
+- An 11-endpoint REST API, including `/api/readings/anomalies` for anomaly detection
+- Six creational design patterns and a generic repository layer (`Repository[T, ID]`)
+- CI/CD with GitHub Actions and branch protection; MIT-licensed and open-source ready
+- Three pull requests contributed to other students' projects (two merged)
+
+> Built incrementally through a full software-engineering lifecycle — specification, requirements, modelling, implementation, persistence, REST API, CI/CD, and open-source collaboration. 
+
 ## Project Overview
 
 This system will simulate various sensors including:
